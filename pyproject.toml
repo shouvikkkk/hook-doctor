@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hook-doctor"
+version = "0.1.0"
+description = "Test and audit Claude Code hook configurations: find the dead guards before a session trusts them"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "Shouvik Maji"}]
+
+[project.scripts]
+hook-doctor = "hookdoctor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hookdoctor*"]
