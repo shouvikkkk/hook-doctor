@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "prompt": "Summarise this notification: $ARGUMENTS",
+            "type": "prompt"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/missing-guard.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/always-allow.sh",
+            "if": "Bash(rm *)",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/misplaced.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/always-allow.sh",
+            "if": "Bash(rm *)",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/slow-cleanup.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/loop-stop.sh",
+            "if": "Bash(git *)",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "sh .claude/hooks/loop-stop.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ]
+  }
+}
